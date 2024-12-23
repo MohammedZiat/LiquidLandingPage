@@ -1,0 +1,95 @@
+<!-- carousel banner start -->
+{% liquid  
+  assign parallaxBackgroundImage = section.settings.parallaxBackgroundImage
+  assign title = section.settings.title
+  assign btnText = section.settings.btnText
+  assign btnUrl = section.settings.btnUrl
+%}
+<style>
+      /* paralax section */
+.paralax-effect {
+  background-image: url("{{ parallaxBackgroundImage | img_url:'2000x' }}");
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  height: 400px;
+  margin: 0 0 30px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.paralax-effect h3 {
+  font-size: 40px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #fff;
+}
+.paralex-btn {
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  color: #000;
+  background-color: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: block;
+  transition: var(--transition-duration);
+  border: 1px solid transparent;
+}
+.paralex-btn:hover {
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+}
+/* paralax section end */
+</style>
+    <section class="paralax-effect">
+      <h3>{{ title }}</h3>
+      {% unless btnUrl = empty %}
+      <a href="{{ btnUrl }}" class="paralex-btn">{{ btnText }}</a>
+      {% endunless %}
+    </section>
+    <!-- carousel banner end -->
+
+
+
+
+    {% schema %}
+
+      {
+        "name":"BeKIJK COLLECTIE Section",
+        "settings":[
+            {
+             "type":"image_picker",
+              "id":"parallaxBackgroundImage",
+              "label":"Parallax Background Image"
+            },
+            {
+              "type":"text",
+              "id":"title",
+              "label":"Title",
+              "default":"BeKIJK DE 1080 COLLECTIE"
+            },
+            {
+              "type":"text",
+              "id":"btnText",
+              "label":"Button Text",
+              "default":"BeKIJK COLLECTIE"
+            },
+            {
+              "type":"url",
+              "id":"btnUrl",
+              "label":"Button Link",
+            }
+      ],
+
+      "presets": [
+         {
+      "name":"BeKIJK COLLECTIE Section"
+      }
+      ]
+      }
+
+    {% endschema %}

@@ -1,0 +1,203 @@
+ <!-- header section start -->
+
+ {% liquid
+    assign backgroundImage = section.settings.backgroundImage   
+    assign topSubTitle = section.settings.topSubTitle
+    assign title = section.settings.title
+    assign mainDescription = section.settings.mainDescription
+    assign logo = section.settings.logo
+    assign backgroundImageMobile =  section.settings.backgroundImageMobile 
+
+%}
+  <style>
+      .banner_section {
+  background-image: url("{{ backgroundImage | img_url:'2000x' }}");
+}
+
+
+
+@media (max-width: 768px) {
+      .banner_section {
+    background-image: url("{{ backgroundImage | img_url:'2000x' }}");
+  }
+}
+  </style>
+    <section class="banner_section">
+      <div
+        class="gap-cu container-custom d-flex-custom flex-column-custom justify-center align-center"
+      >
+        <div
+          class="header-brand d-flex-custom flex-column-custom justify-center align-center"
+        >
+          <span>{{ topSubTitle }}</span>
+          <img src="{{ logo | img_url:'500x' }}" alt="" srcset="{{ logo | img_url:'500x' }}" />
+        </div>
+     
+
+
+        <div class="d-flex-custom woa-showImgBox">
+          {% for block in section.blocks %}
+            {% liquid 
+            assign contentTitle = block.settings.contentTitle
+            assign contentDescription = block.settings.contentDescription
+            assign imageOne = block.settings.imageOne
+            assign imageTwo = block.settings.imageTwo
+            assign imageThree = block.settings.imageThree
+            %}
+            <style>
+                .col-4-full h1 {
+                  font-size: 40px;
+                  line-height: 57px;
+                  font-weight: 700;
+                  color: #fff !important;
+                  margin-bottom: 40px;
+                  text-transform: uppercase;
+                  }
+                  .col-4-full p {
+                  font-size: 16px;
+                  line-height: 26px;
+                  font-weight: 500;
+                  color: #fff !important;
+                  }
+
+            </style>
+
+           {% case block.type %}
+             {% when 'content' %}
+               <div class="col-4-full header-section">
+            <h1>{{ contentTitle }}</h1>
+            <p>
+              {{ contentDescription }}
+            </p>
+          </div>
+             {% when 'image' %}
+               
+                <div class="col-7-full">
+            <div class="show-product-img">
+              <img
+                src="{{ imageOne | img_url:'1200x' }}"
+                class="t-img-1"
+                alt=""
+                srcset=""
+              />
+              <img
+                src="{{ imageTwo | img_url:'1200x' }}"
+                class="t-img-2"
+                alt=""
+                srcset=""
+              />
+              <img
+                src="{{ imageThree | img_url:'1200x' }}"
+                class="t-img-3"
+                alt=""
+                srcset=""
+              />
+            </div>
+          </div>
+               
+           {% endcase %}
+
+          {% endfor %}  
+          
+      
+        </div>
+        <div
+          class="h-bottom-content d-flex-custom flex-column-custom justify-center align-center"
+        >
+          <h3>{{ title }}</h3>
+          <p>
+           {{ mainDescription }}
+          </p>
+        </div>
+      </div>
+</section>
+    <!-- header section start -->
+
+
+{% schema %}
+  {
+    "name": "Landing Page Banner",
+    "blocks": [
+        {
+            "name": "Content",
+            "type": "content",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "contentTitle",
+                    "label": "Title",
+                    "default": "Het Nieuwe Tijdperk van Skiën en Snowboarden"
+                },
+                {
+                    "type": "text",
+                    "id": "contentDescription",
+                    "label": "Description",
+                    "default": "Het Nieuwe Tijdperk van Skiën en Snowboarden"
+                }
+            ]
+        },
+        {
+            "name": "Image",
+            "type": "image",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "imageOne",
+                    "label": "Image One"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "imageTwo",
+                    "label": "Image Two"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "imageThree",
+                    "label": "Image Three"
+                }
+            ]
+        }
+    ],
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "backgroundImage",
+            "label": "Background Image"
+        },
+        {
+            "type": "image_picker",
+            "id": "backgroundImageMobile",
+            "label": "Background Image Mobile"
+        },
+        
+        {
+            "type":"image_picker",
+            "id":"logo",
+            "label": "Logo" 
+      },
+        {
+            "type": "text",
+            "id": "topSubTitle",
+            "label": "Top Sub Title",
+            "default": "ABOUT OUR BRANDS"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Het Nieuwe Tijdperk van Skiën en Snowboarden"
+        },
+        {
+            "type": "text",
+            "id": "mainDescription",
+            "label": "Description",
+            "default": "Het Nieuwe Tijdperk van Skiën en Snowboarden"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Landing Page Banner"
+        }
+    ]
+}
+{% endschema %}

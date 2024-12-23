@@ -1,0 +1,68 @@
+  <!-- product quality start-->
+{% liquid
+      assign featureSectionTitle = section.settings.featureSectionTitle 
+ %}
+    <section class="container-custom">
+      <div
+        class="brand-model d-flex-custom flex-column-custom justify-center align-center"
+      >
+        <h4>{{ featureSectionTitle }}</h4>
+
+        <div class="d-flex-custom gap-cu">
+        {% for block in section.blocks  %}
+          
+          {% liquid 
+              assign mainProductImage = block.settings.mainProductImage
+              assign productIcon = block.settings.productIcon
+      %}
+       <div class="col-3-full">
+            <div class="brand-img">
+              <img src="{{ mainProductImage | img_url:'800x' }}" alt="" />
+              <img src="{{ productIcon | img_url:'800x' }}" class="d-block-m" alt="" />
+            </div>
+          </div>
+
+        {% endfor %}
+        </div>
+      </div>
+    </section>
+
+  {% schema %}
+    {
+       "name":"Product Features Section",
+       "blocks":[
+         {
+          "name":"images",
+         "type":"images",
+         "settings":[
+            {
+               "type":"image_picker",
+               "id":"mainProductImage",
+               "label":" Main Product Image"
+            },
+            {
+               "type":"image_picker",
+               "id":"productIcon",
+               "label":"Product Icon"
+            }
+      ]
+      }
+      ],
+       "settings": [
+                     {
+                      "type":"inline_richtext",
+                      "id": "featureSectionTitle",
+                      "label":"Feature Section Title",
+                      "default":"BEKIJK OOK HET VERHAAL VAN ONZE ANDERE MERKEN"
+                     }
+                   ],
+       "presets": [
+          {
+      "name":" Product Features Section"
+      }
+      ]            
+    }
+
+  {% endschema %}
+
+    <!-- product quality end-->
